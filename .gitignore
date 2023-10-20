@@ -1,32 +1,64 @@
-# Prerequisites
-*.d
+# Ignore Visual Studio files
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Ignore generated project files
+*_i.c
+*_p.c
+*_i.h
+*_p.h
+*.ilk
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
-# Precompiled Headers
+# Ignore log files and debugging output
+Debug/
+Release/
+x64/
+x86/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Ignore precompiled headers
 *.gch
-*.pch
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
+# Ignore libraries and binaries
 *.lib
-
-# Executables
+*.sbr
+*.dll
 *.exe
 *.out
 *.app
+*.ipa
+*.apk
+*.so
+*.dylib
+*.ncb
+
+# Ignore miscellaneous files
+Thumbs.db
+[Tt]humbs.db
+[Tt]ags
+[Dd]esktop.ini
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+*.swp
+*.swo
+*~
+
+# Ignore Visual Studio Code configuration
+.vscode/
