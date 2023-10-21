@@ -132,6 +132,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Pipe.cpp" />
+    <ClCompile Include="src\Floor.cpp" />
+    <ClCompile Include="src\GameScene.cpp" />
     <ClCompile Include="src\AudioFactory.cpp" />
     <ClCompile Include="src\FontFactory.cpp" />
     <ClCompile Include="src\EventEmitter.cpp" />
@@ -142,6 +145,8 @@
     <ClCompile Include="src\TextureFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="header\Floor.h" />
+    <ClInclude Include="header\GameScene.h" />
     <ClInclude Include="header\AudioFactory.h" />
     <ClInclude Include="header\FontFactory.h" />
     <ClInclude Include="header\EventEmitter.h" />
@@ -156,6 +161,7 @@
     <ClInclude Include="header\ResourceLocator.h" />
     <ClInclude Include="header\Scene.h" />
     <ClInclude Include="header\TextureFactory.h" />
+    <ClInclude Include="header\Pipe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

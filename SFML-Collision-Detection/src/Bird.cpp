@@ -1,19 +1,17 @@
 #include "../header/Bird.h"
 #include "../header/AABB.h"
 #include "../header/Globals.h"
+#include "../header/EventEmitter.h"
 
 #include <iostream>
 
 static constexpr float PLAYER_ROTATION_SPEED = 100.f;
 
-
 Bird::Bird(const sf::Vector2f& pos, const sf::Texture& texture)
 {
 	m_playerSprite.setPosition(pos);
 	m_playerSprite.setTexture(texture);
-	m_playerSprite.setScale({ 2.f, 2.f });
 	m_playerSprite.setTextureRect({ 0,0,16,16 });
-
 	m_aabb = std::make_unique<AABB>(m_playerSprite);
 }
 
@@ -24,68 +22,61 @@ void Bird::render(sf::RenderWindow& window)
 
 void Bird::update(float dt)
 {
-	CollisionType collisionType = isCollidingWorldBoundaries();
+	onCeilingCollision();
+
 	m_acceleration += {0, WORLD_GRAVITY};
 
-	if (!m_isAlive || collisionType != CollisionType::NONE) {
-		auto pos = m_playerSprite.getPosition();
-
-		if (m_isAlive) {
-			m_velocity = { 0,0 };
-			switch (collisionType) {
-			case CollisionType::UP:
-				pos += { 0, static_cast<float>(m_playerSprite.getTextureRect().height * 2) };
-				break;
-			default:
-				break;
-			}
+	if (m_isAlive && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		if (!m_leftMouseButtonPressed) {
+			m_acceleration = { 0, -8.f };
+			m_velocity = { 0, 0 };
+			m_leftMouseButtonPressed = true;
 		}
-
-		m_velocity += m_acceleration;
-		pos += m_velocity * dt;
-		pos = { pos.x, std::min(pos.y, static_cast<float>(SCREEN_HEIGHT - m_playerSprite.getTextureRect().height * 2)) };
-
-		m_playerSprite.setPosition(pos);
-		m_playerSprite.setRotation(90);
-		m_aabb->update(m_playerSprite);
-		m_isAlive = false;
 	}
 	else {
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			if (!m_leftMouseButtonPressed) {
-				m_acceleration = { 0, -11.f };
-				m_velocity = { 0, 0 };
-				m_leftMouseButtonPressed = true;
-			}
-		}
-		else {
-			m_leftMouseButtonPressed = false;
-		}
+		m_leftMouseButtonPressed = false;
+	}
 
-		m_velocity += m_acceleration;
-		auto pos = m_playerSprite.getPosition() + m_velocity * dt;
-
+	if (m_isAlive) {
 		updateAnimation(dt);
 		updateRotation(dt);
-
-		m_playerSprite.setPosition(pos);
-		m_aabb->update(m_playerSprite);
 	}
+
+	m_velocity += m_acceleration;
+	auto pos = m_playerSprite.getPosition() + m_velocity * dt;
+	pos.y = std::max(pos.y, 0.f);
+
+	m_playerSprite.setPosition(pos);
+	m_aabb->update(m_playerSprite);
 }
 
 void Bird::update(float dt, GameEntity& entity)
 {
+	if (m_aabb->intersect(entity.getBoudingShape())) {
+		auto [bMin, bMax] = m_aabb->getBounds();
+		auto [eMin, eMax] = entity.getBoudingShape().getBounds();
+		auto [bPosX, bPosY] = m_playerSprite.getPosition();
+
+		m_acceleration = { 0,0 };
+		m_velocity = { 0, 0 };
+		m_isAlive = false;
+
+		float depth = std::abs(bMin.y - eMax.y);
+		m_playerSprite.setPosition(bPosX, bPosY);
+
+		EventEmitter::emit({ GameEventTypes::GAME_OVER });
+	}
+}
+
+BoundingShape& Bird::getBoudingShape()
+{
+	return *m_aabb;
 }
 
 void Bird::setTextureRect(const sf::IntRect& textureRect)
 {
 	m_playerSprite.setTextureRect(textureRect);
 	m_aabb->update(m_playerSprite);
-}
-
-sf::Sprite& Bird::getEntity()
-{
-	return m_playerSprite;
 }
 
 void Bird::updateRotation(float dt)
@@ -101,13 +92,14 @@ void Bird::updateRotation(float dt)
 	m_playerSprite.setRotation(m_playerRotation);
 }
 
-CollisionType Bird::isCollidingWorldBoundaries()
+void Bird::onCeilingCollision()
 {
 	auto [min, max] = m_aabb->getBounds();
 
-	if (min.y < 0) return CollisionType::UP;
-	if (max.y > SCREEN_HEIGHT) return CollisionType::BOTTOM;
-	return CollisionType::NONE;
+	if (min.y < 0) {
+		m_isAlive = false;
+		EventEmitter::emit({ GameEventTypes::GAME_OVER });
+	}
 }
 
 void Bird::updateAnimation(float dt)

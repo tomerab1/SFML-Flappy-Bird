@@ -17,13 +17,13 @@ public:
 	void render(sf::RenderWindow& window) override;
 	void update(float dt) override;
 	void update(float dt, GameEntity& entity) override;
+	BoundingShape& getBoudingShape() override;
 	void setTextureRect(const sf::IntRect& textureRect) override;
-	sf::Sprite& getEntity() override;
 
 private:
 	void updateAnimation(float dt);
 	void updateRotation(float dt);
-	CollisionType isCollidingWorldBoundaries();
+	void onCeilingCollision();
 
 private:
 	float m_animationDuration{ BIRD_ANIMATION_DURATION };

@@ -2,10 +2,13 @@
 
 #include <cinttypes>
 
-constexpr uint32_t SCREEN_WIDTH = 1920;
-constexpr uint32_t SCREEN_HEIGHT = 1080;
+constexpr uint32_t SCREEN_WIDTH = 180;
+constexpr uint32_t SCREEN_HEIGHT = 320;
+constexpr uint32_t SCREEN_RESIZE = 2;
 
-constexpr float WORLD_GRAVITY = 0.25f;
+constexpr int BIRD_WIDTH = 16;
+
+constexpr float WORLD_GRAVITY = 0.35f;
 
 enum class CollisionType {
 	UP,
