@@ -22,6 +22,8 @@ void Bird::render(sf::RenderWindow& window)
 
 void Bird::update(float dt)
 {
+	if (m_hitFloor) return;
+
 	onCeilingCollision();
 
 	m_acceleration += {0, WORLD_GRAVITY};
@@ -52,6 +54,8 @@ void Bird::update(float dt)
 
 void Bird::update(float dt, GameEntity& entity)
 {
+	if (m_hitFloor) return;
+
 	if (m_aabb->intersect(entity.getBoudingShape())) {
 		auto [bMin, bMax] = m_aabb->getBounds();
 		auto [eMin, eMax] = entity.getBoudingShape().getBounds();
@@ -59,10 +63,7 @@ void Bird::update(float dt, GameEntity& entity)
 
 		m_acceleration = { 0,0 };
 		m_velocity = { 0, 0 };
-		m_isAlive = false;
-
-		float depth = std::abs(bMin.y - eMax.y);
-		m_playerSprite.setPosition(bPosX, bPosY);
+		m_hitFloor = true;
 
 		EventEmitter::emit({ GameEventTypes::GAME_OVER });
 	}

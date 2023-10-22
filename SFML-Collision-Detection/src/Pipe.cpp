@@ -22,5 +22,5 @@ void Pipe::setTextureRect(const sf::IntRect& textureRect)
 
 BoundingShape& Pipe::getBoudingShape()
 {
-    // TODO: insert return statement here
+    return *m_aabb;
 }

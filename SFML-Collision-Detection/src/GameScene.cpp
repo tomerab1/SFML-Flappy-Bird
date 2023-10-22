@@ -22,6 +22,6 @@ void GameScene::update(float dt)
 void GameScene::render(sf::RenderWindow& window)
 {
 	window.draw(m_bg);
-	m_bird.render(window);
 	m_floor.render(window);
+	m_bird.render(window);
 }

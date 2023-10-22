@@ -30,6 +30,7 @@ private:
 	float m_playerRotation{ 0 };
 	int m_animationFrame{ 0 };
 
+	bool m_hitFloor{ false };
 	bool m_isAlive{ true };
 	bool m_leftMouseButtonPressed{ false };
 
