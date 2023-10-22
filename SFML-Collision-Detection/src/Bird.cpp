@@ -1,5 +1,7 @@
 #include "../header/Bird.h"
+
 #include "../header/AABB.h"
+#include "../header/Floor.h"
 #include "../header/Globals.h"
 #include "../header/EventEmitter.h"
 
@@ -57,14 +59,13 @@ void Bird::update(float dt, GameEntity& entity)
 	if (m_hitFloor) return;
 
 	if (m_aabb->intersect(entity.getBoudingShape())) {
-		auto [bMin, bMax] = m_aabb->getBounds();
-		auto [eMin, eMax] = entity.getBoudingShape().getBounds();
-		auto [bPosX, bPosY] = m_playerSprite.getPosition();
-
-		m_acceleration = { 0,0 };
-		m_velocity = { 0, 0 };
-		m_hitFloor = true;
-
+		if (dynamic_cast<Floor*>(&entity)) {
+			m_hitFloor = true;
+			m_acceleration = { 0,0 };
+			m_velocity = { 0, 0 };
+		}
+		
+		m_isAlive = false;
 		EventEmitter::emit({ GameEventTypes::GAME_OVER });
 	}
 }

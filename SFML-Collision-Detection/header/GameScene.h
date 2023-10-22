@@ -1,10 +1,13 @@
 #pragma once
 #include "Scene.h"
 
+#include "Globals.h"
 #include "Bird.h"
+#include "PipeContainer.h"
 #include "Floor.h"
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 class GameScene : public Scene
 {
@@ -16,6 +19,10 @@ public:
 private:
 	Bird m_bird;
 	Floor m_floor;
+	PipeContainer m_pipes;
+
+	int m_score{ 0 };
+	bool m_isGameOver{ false };
 	sf::RectangleShape m_bg;
 };
 

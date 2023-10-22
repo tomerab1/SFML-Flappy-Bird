@@ -2,10 +2,6 @@
 
 #include <iostream>
 
-AABB::AABB(const sf::Vector2f& min, const sf::Vector2f& max) : m_min{min}, m_max{max}
-{
-}
-
 AABB::AABB(const sf::Sprite& sprite)
 {
 	auto [posX, posY] = sprite.getGlobalBounds().getPosition();
@@ -13,6 +9,13 @@ AABB::AABB(const sf::Sprite& sprite)
 
 	m_min = { posX, posY };
 	m_max = { posX + sizeX, posY + sizeY };
+}
+
+AABB::AABB(const BoundingShape& shape)
+{
+	auto [min, max] = shape.getBounds();
+	m_min = min;
+	m_max = max;
 }
 
 void AABB::update(const sf::Sprite& sprite)
@@ -34,7 +37,7 @@ bool AABB::intersect(const BoundingShape& other) const
 	return true;
 }
 
-const std::pair<const sf::Vector2f&, const sf::Vector2f&> AABB::getBounds() const
+const std::pair<sf::Vector2f, sf::Vector2f> AABB::getBounds() const
 {
 	return std::make_pair(m_min, m_max);
 }

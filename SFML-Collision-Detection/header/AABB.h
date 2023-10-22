@@ -8,14 +8,13 @@
 class AABB : public BoundingShape
 {
 public:
-	explicit AABB(const sf::Vector2f& min, const sf::Vector2f& max);
 	explicit AABB(const sf::Sprite& shape);
+	explicit AABB(const BoundingShape& shape);
 
 	void update(const sf::Sprite& shape);
 	bool intersect(const BoundingShape& other) const;
 
-
-	const std::pair<const sf::Vector2f&, const sf::Vector2f&> getBounds() const;
+	const std::pair<sf::Vector2f, sf::Vector2f> getBounds() const;
 
 private:
 	sf::Vector2f m_min;

@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\PipeContainer.cpp" />
     <ClCompile Include="src\Pipe.cpp" />
     <ClCompile Include="src\Floor.cpp" />
     <ClCompile Include="src\GameScene.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="header\Scene.h" />
     <ClInclude Include="header\TextureFactory.h" />
     <ClInclude Include="header\Pipe.h" />
+    <ClInclude Include="header\PipeContainer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

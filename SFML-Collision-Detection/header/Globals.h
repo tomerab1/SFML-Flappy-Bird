@@ -6,7 +6,7 @@ constexpr uint32_t SCREEN_WIDTH = 180;
 constexpr uint32_t SCREEN_HEIGHT = 320;
 constexpr uint32_t SCREEN_RESIZE = 2;
 
-constexpr int BIRD_WIDTH = 16;
+constexpr int BIRD_WIDTH = 32;
 
 constexpr float WORLD_GRAVITY = 0.35f;
 

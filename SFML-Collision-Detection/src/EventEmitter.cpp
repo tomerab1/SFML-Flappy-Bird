@@ -1,5 +1,7 @@
 #include "../header/EventEmitter.h"
 
+#include <cassert>
+
 std::queue<GameEvent> EventEmitter::m_eventQueue;
 
 void EventEmitter::emit(const GameEvent& event) { m_eventQueue.push(event); }
@@ -14,4 +16,13 @@ bool EventEmitter::pollEvent(GameEvent& event) {
     }
 
     return isPolling;
+}
+
+const GameEvent& EventEmitter::peek()
+{
+    if (m_eventQueue.empty()) {
+        return GameEvent{ GameEventTypes::GAME_NONE };
+    }
+
+    return m_eventQueue.front();
 }
