@@ -16,7 +16,7 @@ public:
 	BoundingShape& getBoudingShape() override;
 
 private:
-	sf::Vector2f m_velocity{ -40, 0 };
+	sf::Vector2f m_velocity{ -60, 0 };
 	sf::Sprite m_pipeSprite;
 	std::unique_ptr<BoundingShape> m_aabb;
 };

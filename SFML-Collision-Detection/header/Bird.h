@@ -4,8 +4,6 @@
 #include "GameEntity.h"
 #include "BoundingShape.h"
 
-#include <array>
-
 static constexpr int BIRD_NUM_OF_ANIMATIONS = 4;
 static constexpr float BIRD_ANIMATION_DURATION = 0.2f;
 
@@ -35,7 +33,7 @@ private:
 	bool m_playedHit{ false };
 	bool m_leftMouseButtonPressed{ false };
 
-	sf::Vector2f m_velocity{ 0, 200.f };
+	sf::Vector2f m_velocity{ 0, 250.f };
 	sf::Vector2f m_acceleration;
 
 	sf::Sprite m_playerSprite;

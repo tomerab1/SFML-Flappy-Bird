@@ -6,6 +6,8 @@
 #include "../header/EventEmitter.h"
 #include "../header/ResourceLocator.h"
 #include "../header/GameScene.h"
+#include "../header/MainMenuScene.h"
+#include "../header/GameOverScene.h"
 
 #include <cassert>
 #include <iostream>
