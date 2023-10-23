@@ -22,7 +22,10 @@ private:
 	PipeContainer m_pipes;
 
 	int m_score{ 0 };
+	bool m_didInc{ false };
 	bool m_isGameOver{ false };
+
+	sf::Text m_text;
 	sf::RectangleShape m_bg;
 };
 
