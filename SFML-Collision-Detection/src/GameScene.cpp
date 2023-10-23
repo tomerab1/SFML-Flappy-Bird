@@ -16,6 +16,7 @@ GameScene::GameScene() :
 	m_bg.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
 
 	m_text.setFont(ResourceLocator<FontFactory>::getFont(R"(.\Res\Flappy Bird Assets\font\font.ttf)"));
+	m_text.setFillColor(sf::Color::Black);
 	m_text.setCharacterSize(20);
 	m_text.setString(std::to_string(m_score));
 	m_text.setPosition({ SCREEN_WIDTH / 2, static_cast<float>(m_text.getCharacterSize()) });
@@ -38,6 +39,7 @@ void GameScene::update(float dt)
 		m_score++;
 		m_text.setString(std::to_string(m_score));
 		m_didInc = true;
+		ResourceLocator<AudioFactory>::play("pointSound", sf::Time::Zero);
 	}
 
 	for (auto& pipe : m_pipes) {

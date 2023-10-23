@@ -81,4 +81,8 @@ void Application::loadAssets() const
 	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Background\Background.png)", "bgTexture");
 	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Tileset\Ground.png)", "floorTexture");
 	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Tileset\Pipes.png)", "pipeTexture");
+	ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\Flappy Bird Assets\Sounds\sfx_die.wav)", "dieSound");
+	ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\Flappy Bird Assets\Sounds\sfx_hit.wav)", "hitSound");
+	ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\Flappy Bird Assets\Sounds\sfx_point.wav)", "pointSound");
+	ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\Flappy Bird Assets\Sounds\sfx_wing.wav)", "wingSound");
 }

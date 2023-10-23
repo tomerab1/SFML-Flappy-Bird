@@ -4,6 +4,7 @@
 #include "../header/Floor.h"
 #include "../header/Globals.h"
 #include "../header/EventEmitter.h"
+#include "../header/ResourceLocator.h"
 
 #include <iostream>
 
@@ -24,6 +25,11 @@ void Bird::render(sf::RenderWindow& window)
 
 void Bird::update(float dt)
 {
+	if (!m_playedHit && (m_hitFloor || !m_isAlive)) {
+		ResourceLocator<AudioFactory>::play("hitSound", sf::Time::Zero);
+		m_playedHit = true;
+	}
+
 	if (m_hitFloor) return;
 
 	onCeilingCollision();
@@ -35,6 +41,7 @@ void Bird::update(float dt)
 			m_acceleration = { 0, -8.f };
 			m_velocity = { 0, 0 };
 			m_leftMouseButtonPressed = true;
+			ResourceLocator<AudioFactory>::play("wingSound", sf::Time::Zero);
 		}
 	}
 	else {
