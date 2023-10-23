@@ -77,8 +77,8 @@ void Application::handleGameEvents()
 
 void Application::loadAssets() const
 {
-	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Player\bird3.png)", "birdTexture");
-	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Background\Background2.png)", "bgTexture");
-	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Tileset\Style 1\Ground.png)", "floorTexture");
-	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Tileset\Style 1\Pipes.png)", "pipeTexture");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Player\bird.png)", "birdTexture");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Background\Background.png)", "bgTexture");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Tileset\Ground.png)", "floorTexture");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Tileset\Pipes.png)", "pipeTexture");
 }
