@@ -70,6 +70,12 @@ void Application::handleGameEvents()
 	GameEvent gEvent;
 	while (EventEmitter::pollEvent(gEvent)) {
 		switch (gEvent.eventType) {
+		case GameEventTypes::GAME_START:
+			break;
+		case GameEventTypes::GAME_PAUSED:
+			break;
+		case GameEventTypes::GAME_OVER:
+			break;
 		default:
 			break;
 		}
@@ -79,12 +85,31 @@ void Application::handleGameEvents()
 
 void Application::loadAssets() const
 {
+	// Game elements
 	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Player\bird.png)", "birdTexture");
 	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Background\Background.png)", "bgTexture");
 	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Tileset\Ground.png)", "floorTexture");
 	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Tileset\Pipes.png)", "pipeTexture");
+
+	// Buttons
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Buttons\button_menu.png)", "btnMenu");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Buttons\button_ok.png)", "btnOk");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Buttons\button_pause.png)", "btnPause");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Buttons\button_play.png)", "btnPlay");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Buttons\button_resume.png)", "btnResume");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Buttons\button_score.png)", "btnScore");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Buttons\button_share.png)", "btnShare");
+
+	// Labels
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Labels\instructions.png)", "labelInstructions");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Labels\label_flappy_bird.png)", "labelFlappyBird");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Labels\label_game_over.png)", "labelGameOver");
+	ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\Flappy Bird Assets\Labels\label_get_ready.png)", "labelGetReady");
+
+	// Sounds
 	ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\Flappy Bird Assets\Sounds\sfx_die.wav)", "dieSound");
 	ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\Flappy Bird Assets\Sounds\sfx_hit.wav)", "hitSound");
 	ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\Flappy Bird Assets\Sounds\sfx_point.wav)", "pointSound");
 	ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\Flappy Bird Assets\Sounds\sfx_wing.wav)", "wingSound");
+	ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\Flappy Bird Assets\Sounds\sfx_swooshing.wav)", "swooshSound");
 }
