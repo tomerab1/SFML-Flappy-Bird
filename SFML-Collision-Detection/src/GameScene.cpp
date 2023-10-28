@@ -29,14 +29,13 @@ void GameScene::update(float dt)
 {
 	if (m_pauseBtn.isClicked(m_winRef)) {
 		m_isPaused = !m_isPaused;
+		ResourceLocator<AudioFactory>::play("swooshSound", sf::Time::Zero);
+		m_isPaused ? m_pauseBtn.setTexture(*ResourceLocator<TextureFactory>::getTexture("btnResume"))
+			: m_pauseBtn.setTexture(*ResourceLocator<TextureFactory>::getTexture("btnPause"));
 	}
 
 	if (m_isPaused) {
-		m_pauseBtn.setTexture(*ResourceLocator<TextureFactory>::getTexture("btnResume"));
 		return;
-	}
-	else {
-		m_pauseBtn.setTexture(*ResourceLocator<TextureFactory>::getTexture("btnPause"));
 	}
 
 	auto [pMin, pMax] = m_pipes.begin()->getBoudingShape().getBounds();

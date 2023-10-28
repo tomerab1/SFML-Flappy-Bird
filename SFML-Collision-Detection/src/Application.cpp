@@ -80,7 +80,12 @@ void Application::handleGameEvents()
 			m_scenes.emplace(std::make_unique<GameScene>(m_window));
 			break;
 		case GameEventTypes::GAME_OVER:
-			std::cout << "Game over\n";
+			sf::sleep(sf::seconds(0.5f));
+			m_scenes.pop();
+			m_scenes.emplace(std::make_unique<GameOverScene>(m_window));
+			break;
+		case GameEventTypes::GAME_RESTART:
+			m_scenes.emplace(std::make_unique<MainMenuScene>(m_window));
 			break;
 		default:
 			break;
