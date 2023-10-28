@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\MainMenuScene.cpp" />
     <ClCompile Include="src\GameOverScene.cpp" />
     <ClCompile Include="src\PipeContainer.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="header\Pipe.h" />
     <ClInclude Include="header\PipeContainer.h" />
     <ClInclude Include="header\MainMenuScene.h" />
+    <ClInclude Include="header\Button.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,8 +9,10 @@ class AABB : public BoundingShape
 {
 public:
 	explicit AABB(const sf::Sprite& shape);
+	explicit AABB(const sf::Shape& shape);
 	explicit AABB(const BoundingShape& shape);
 
+	void update(const sf::Shape& shape);
 	void update(const sf::Sprite& shape);
 	bool intersect(const BoundingShape& other) const;
 

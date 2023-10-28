@@ -11,11 +11,29 @@ AABB::AABB(const sf::Sprite& sprite)
 	m_max = { posX + sizeX, posY + sizeY };
 }
 
+AABB::AABB(const sf::Shape& shape)
+{
+	auto [posX, posY] = shape.getGlobalBounds().getPosition();
+	auto [sizeX, sizeY] = shape.getGlobalBounds().getSize();
+
+	m_min = { posX, posY };
+	m_max = { posX + sizeX, posY + sizeY };
+}
+
 AABB::AABB(const BoundingShape& shape)
 {
 	auto [min, max] = shape.getBounds();
 	m_min = min;
 	m_max = max;
+}
+
+void AABB::update(const sf::Shape& shape)
+{
+	auto [posX, posY] = shape.getGlobalBounds().getPosition();
+	auto [sizeX, sizeY] = shape.getGlobalBounds().getSize();
+
+	m_min = { posX, posY };
+	m_max = { posX + sizeX, posY + sizeY };
 }
 
 void AABB::update(const sf::Sprite& sprite)

@@ -7,7 +7,9 @@
 #include "../header/ResourceLocator.h"
 #include "../header/GameScene.h"
 #include "../header/MainMenuScene.h"
+#include "../header/MainMenuScene.h"
 #include "../header/GameOverScene.h"
+#include "../header/Button.h"
 
 #include <cassert>
 #include <iostream>
@@ -15,23 +17,23 @@
 Application::Application(const sf::VideoMode& vMode, const std::string& title) : m_window{ vMode, title, sf::Style::Close }
 {
 	m_window.setView(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)));
-	loadAssets();
-	m_scenes.emplace(std::make_unique<GameScene>());
 }
 
 int Application::exec()
 {
 	try {
+		loadAssets();
+		EventEmitter::emit({ GameEventTypes::GAME_MENU });
+
 		m_window.setFramerateLimit(60);
 		sf::Clock clock;
 
 		while (m_window.isOpen()) {
-			assert(m_scenes.size() != 0);
-			float dt = clock.restart().asSeconds();
-
 			handleFrameworkEvents();
 			handleGameEvents();
 
+			float dt = clock.restart().asSeconds();
+			assert(!m_scenes.empty());
 			m_scenes.top()->update(dt);
 
 			m_window.clear(sf::Color::Black);
@@ -70,7 +72,11 @@ void Application::handleGameEvents()
 	GameEvent gEvent;
 	while (EventEmitter::pollEvent(gEvent)) {
 		switch (gEvent.eventType) {
+		case GameEventTypes::GAME_MENU:
+			m_scenes.emplace(std::make_unique<MainMenuScene>(m_window));
+			break;
 		case GameEventTypes::GAME_START:
+			m_scenes.emplace(std::make_unique<GameScene>());
 			break;
 		case GameEventTypes::GAME_PAUSED:
 			break;
