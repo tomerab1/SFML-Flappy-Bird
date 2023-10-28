@@ -31,7 +31,7 @@ private:
 	bool m_hitFloor{ false };
 	bool m_isAlive{ true };
 	bool m_playedHit{ false };
-	bool m_leftMouseButtonPressed{ false };
+	bool m_isKeyPressed{ false };
 
 	sf::Vector2f m_velocity{ 0, 250.f };
 	sf::Vector2f m_acceleration;

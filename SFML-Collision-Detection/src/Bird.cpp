@@ -36,16 +36,16 @@ void Bird::update(float dt)
 
 	m_acceleration += {0, WORLD_GRAVITY};
 
-	if (m_isAlive && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-		if (!m_leftMouseButtonPressed) {
+	if (m_isAlive && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		if (!m_isKeyPressed) {
 			m_acceleration = { 0, -8.f };
 			m_velocity = { 0, 0 };
-			m_leftMouseButtonPressed = true;
+			m_isKeyPressed = true;
 			ResourceLocator<AudioFactory>::play("wingSound", sf::Time::Zero);
 		}
 	}
 	else {
-		m_leftMouseButtonPressed = false;
+		m_isKeyPressed = false;
 	}
 
 	if (m_isAlive) {
