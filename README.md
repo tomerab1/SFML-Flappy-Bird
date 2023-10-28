@@ -1,4 +1,5 @@
-# SFML-Collision-Detection
+# SFML-Flappy-Bird
+This is a simple clone of the game 'Flappy Bird' using SFML and c++17.
 
 # Build
 Clone the repository.
