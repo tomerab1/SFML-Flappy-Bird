@@ -3,7 +3,7 @@ This is a simple clone of the game 'Flappy Bird' using SFML and c++17.
 
 # Build
 Clone the repository.
-Open the .sln file with Visual Studio, build the project.
+Open the .sln file with Visual Studio and build the project.
 Go to the x64/Debug folder and add the following files to it:
 1.  openal32.dll
 2.  sfml-audio-d-2.dll
