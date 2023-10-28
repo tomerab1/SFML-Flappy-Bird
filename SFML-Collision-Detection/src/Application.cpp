@@ -34,6 +34,7 @@ int Application::exec()
 
 			float dt = clock.restart().asSeconds();
 			assert(!m_scenes.empty());
+
 			m_scenes.top()->update(dt);
 
 			m_window.clear(sf::Color::Black);
@@ -76,17 +77,16 @@ void Application::handleGameEvents()
 			m_scenes.emplace(std::make_unique<MainMenuScene>(m_window));
 			break;
 		case GameEventTypes::GAME_START:
-			m_scenes.emplace(std::make_unique<GameScene>());
-			break;
-		case GameEventTypes::GAME_PAUSED:
+			m_scenes.emplace(std::make_unique<GameScene>(m_window));
 			break;
 		case GameEventTypes::GAME_OVER:
+			std::cout << "Game over\n";
 			break;
 		default:
 			break;
 		}
 	}
-	
+
 }
 
 void Application::loadAssets() const

@@ -6,14 +6,18 @@
 
 #include <iostream>
 
-GameScene::GameScene() :
+GameScene::GameScene(sf::RenderWindow& window) :
 	m_bird{ sf::Vector2f(SCREEN_WIDTH / 2 - BIRD_WIDTH, SCREEN_HEIGHT / 2 - BIRD_WIDTH),
 	*ResourceLocator<TextureFactory>::getTexture("birdTexture") },
 	m_floor{ sf::Vector2f(0, SCREEN_HEIGHT - 31),
-	*ResourceLocator<TextureFactory>::getTexture("floorTexture") }
+	*ResourceLocator<TextureFactory>::getTexture("floorTexture") },
+	m_pauseBtn{ "btnPause", sf::RectangleShape({10, 10}) },
+	m_winRef{ window }
 {
 	m_bg.setTexture(ResourceLocator<TextureFactory>::getTexture("bgTexture").get());
 	m_bg.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+
+	m_pauseBtn.setPosition({ 10, 10 });
 
 	m_text.setFont(ResourceLocator<FontFactory>::getFont(R"(.\Res\Flappy Bird Assets\font\font.ttf)"));
 	m_text.setCharacterSize(20);
@@ -23,6 +27,18 @@ GameScene::GameScene() :
 
 void GameScene::update(float dt)
 {
+	if (m_pauseBtn.isClicked(m_winRef)) {
+		m_isPaused = !m_isPaused;
+	}
+
+	if (m_isPaused) {
+		m_pauseBtn.setTexture(*ResourceLocator<TextureFactory>::getTexture("btnResume"));
+		return;
+	}
+	else {
+		m_pauseBtn.setTexture(*ResourceLocator<TextureFactory>::getTexture("btnPause"));
+	}
+
 	auto [pMin, pMax] = m_pipes.begin()->getBoudingShape().getBounds();
 	auto [bMin, bMax] = m_bird.getBoudingShape().getBounds();
 	float pCenterX = pMin.x + (pMax.x - pMin.x);
@@ -45,7 +61,7 @@ void GameScene::update(float dt)
 		m_bird.update(dt, pipe);
 	}
 
-	if (EventEmitter::peek().eventType == GameEventTypes::GAME_OVER) {
+	if (EventEmitter::peek().eventType == GameEventTypes::GAME_SCENE_OVER) {
 		m_isGameOver = true;
 	}
 
@@ -58,6 +74,7 @@ void GameScene::render(sf::RenderWindow& window)
 {
 	window.draw(m_bg);
 	m_pipes.render(window);
+	m_pauseBtn.render(window);
 	m_floor.render(window);
 	m_bird.render(window);
 	window.draw(m_text);

@@ -70,10 +70,11 @@ void Bird::update(float dt, GameEntity& entity)
 			m_hitFloor = true;
 			m_acceleration = { 0,0 };
 			m_velocity = { 0, 0 };
+			EventEmitter::emit({ GameEventTypes::GAME_OVER });
 		}
 		
 		m_isAlive = false;
-		EventEmitter::emit({ GameEventTypes::GAME_OVER });
+		EventEmitter::emit({ GameEventTypes::GAME_SCENE_OVER });
 	}
 }
 

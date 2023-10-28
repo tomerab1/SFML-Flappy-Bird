@@ -11,10 +11,12 @@ public:
 
 	void setPosition(const sf::Vector2f& pos);
 	void render(sf::RenderWindow& window);
+	void setTexture(const sf::Texture& texture);
 	bool isClicked(const sf::RenderWindow& window);
 
 private:
 	AABB m_aabb;
 	sf::RectangleShape m_rect;
+	bool m_leftMouseButtonPressed{ false };
 };
 
